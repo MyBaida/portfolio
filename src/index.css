@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme {
+  /* Sky & Mint — muted, calm, cool (toned down) */
+  --color-base: #edf0f2;
+  --color-base-2: #e2e7ea;
+  --color-surface: #f9fafb;
+  --color-ink: #1b2831;
+  --color-ink-soft: #4b5d69;
+  --color-muted: #75858f;
+
+  --color-sky: #6fa8c7;
+  --color-sky-deep: #457e9f;
+  --color-sky-soft: #d2e1ea;
+  --color-mint: #6fb3a1;
+  --color-mint-deep: #4a8f7d;
+  --color-mint-soft: #d5e7e0;
+
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius-glass: 1.5rem;
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :root {
+    color-scheme: light;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: #1b2831;
+    background-color: var(--color-base);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+  }
+
+  ::selection {
+    background: var(--color-mint-soft);
+    color: var(--color-ink);
+  }
+}
+
+@layer utilities {
+  /* Frosted glass panel */
+  .glass {
+    background: color-mix(in srgb, var(--color-surface) 62%, transparent);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid color-mix(in srgb, #ffffff 70%, transparent);
+    box-shadow:
+      0 10px 30px -12px rgba(14, 42, 58, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .glass-strong {
+    background: color-mix(in srgb, var(--color-surface) 80%, transparent);
+    backdrop-filter: blur(22px) saturate(150%);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+    border: 1px solid color-mix(in srgb, #ffffff 80%, transparent);
+    box-shadow: 0 18px 50px -18px rgba(14, 42, 58, 0.28);
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--color-sky-deep),
+      var(--color-mint-deep)
+    );
+    /* Solid fallback so the text is never invisible if clipping is unsupported */
+    color: var(--color-sky-deep);
+  }
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .text-gradient {
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+
+  .ring-soft {
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-sky) 22%, transparent);
+  }
+
+  /* Ambient background wash — subtle */
+  .app-bg {
+    background:
+      radial-gradient(
+        1100px 600px at 12% -10%,
+        color-mix(in srgb, var(--color-sky-soft) 34%, transparent),
+        transparent 60%
+      ),
+      radial-gradient(
+        900px 620px at 100% 110%,
+        color-mix(in srgb, var(--color-mint-soft) 32%, transparent),
+        transparent 55%
+      ),
+      linear-gradient(160deg, var(--color-base), var(--color-base-2));
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--color-sky) 40%, transparent)
+      transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--color-sky) 40%, transparent);
+    border-radius: 999px;
+  }
+}
+
+/* Subtle floating keyframe used by a few decorative bits */
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.animate-floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
