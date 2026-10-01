@@ -14,7 +14,7 @@ export default function About() {
 
   return (
     <PanelShell caption="Get to know me" title="About" accent="mint">
-      <div className="grid h-full min-h-0 items-start gap-8 lg:grid-cols-[1fr_1.05fr]">
+      <div className="grid h-full min-h-0 items-start gap-8 lg:grid-cols-[55%_45%]">
         {/* Left — about text */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}

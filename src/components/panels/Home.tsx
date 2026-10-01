@@ -4,6 +4,7 @@ import { ArrowRight, Download, Sparkles } from 'lucide-react'
 import PanelShell from '../PanelShell'
 import { profile } from '../../data/profile'
 import { useNav } from '../../context/nav'
+import RotatingText from '../RotatingText'
 
 export default function Home() {
   const { go } = useNav()
@@ -33,7 +34,7 @@ export default function Home() {
 
   return (
     <PanelShell caption="Welcome" title="Home">
-      <div className="grid h-full min-h-0 items-center gap-6 lg:grid-cols-2">
+      <div className="grid h-full min-h-0 items-center gap-6 lg:grid-cols-[55%_45%]">
         {/* Left — copy */}
         <div className="max-w-xl">
           <motion.div
@@ -55,7 +56,13 @@ export default function Home() {
             Hi, I'm{' '}
             <span className="text-gradient">{profile.name}</span>
             <br />
-            <span className="text-[#4b5d69]">{profile.tagline}</span>
+            <span className="text-[#4b5d69]">
+              I build{' '}
+              <RotatingText
+                words={profile.rotatingRoles}
+                className="text-gradient"
+              />
+            </span>
           </motion.h1>
 
           <p
@@ -104,7 +111,7 @@ export default function Home() {
             <img
               src={profile.heroImage}
               alt={profile.name}
-              className="w-full select-none drop-shadow-2xl"
+              className="w-full select-none drop-shadow-2xl -mt-24 "
               draggable={false}
             />
           </motion.div>
